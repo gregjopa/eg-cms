@@ -9,18 +9,24 @@
 <body>
 
   <script type="text/x-handlebars">
-    <h2>EG-CMS Demo Site</h2>
-
-    {{outlet}}
+    <div class="container eg-cms-container">
+      <h3>EG-CMS Demo Site</h3>
+      {{outlet}}
+    </div>
   </script>
 
 
   <script type="text/x-handlebars" id="pages">
-    <ul>
-      {{#each item in model}}
-        <li>{{#linkTo 'page' item}} {{item.name}} {{/linkTo}}</li>
-      {{/each}}
-    </ul>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <ul class="nav">
+          {{#each item in model}}
+            <li>{{#linkTo 'page' item}} {{item.name}} {{/linkTo}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+
     {{outlet}}
   </script>
 
