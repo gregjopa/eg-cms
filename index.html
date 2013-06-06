@@ -11,30 +11,49 @@
   <script type="text/x-handlebars">
     <div class="container eg-cms-container">
       <h3>EG-CMS Demo Site</h3>
+      {{render menu}}
       {{outlet}}
     </div>
   </script>
 
 
-  <script type="text/x-handlebars" id="pages">
+  <script type="text/x-handlebars" id="menu">
     <div class="navbar">
       <div class="navbar-inner">
         <ul class="nav">
-          {{#each item in model}}
-            <li>{{#linkTo 'page' item}} {{item.name}} {{/linkTo}}</li>
+          {{#each model}}
+            <li>{{#linkToPage name this}} {{name}} {{/linkToPage}}</li>
           {{/each}}
         </ul>
       </div>
     </div>
-
-    {{outlet}}
   </script>
+
 
 
   <script type="text/x-handlebars" id="page">
     <h3>{{name}}</h3>
     <p>sheet id: {{sheetId}}</p>
+    {{control 'home'}}
   </script>
+
+
+
+
+  <script type="text/x-handlebars" id="home">
+    <p>Home page</p>
+  </script>
+
+
+  <script type="text/x-handlebars" id="about">
+    <p>About page</p>
+  </script>
+
+
+  <script type="text/x-handlebars" id="contact">
+    <p>Contact page</p>
+  </script>
+
 
 
   <script src="js/libs/jquery-1.9.1.js"></script>

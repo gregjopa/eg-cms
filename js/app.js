@@ -3,34 +3,73 @@ App = Ember.Application.create({
   spreadsheetRootUrl: 'https://spreadsheets.google.com/feeds'
 });
 
+
 // ROUTES
 
 App.Router.map(function() {
-  this.resource('pages', {path: ''}, function() {
-    this.resource('page', { path: ':page_id' })
-  });
+  // TODO: remove hard-coding and dynamically map routes for each sheet in google spreadsheet
+  this.route('home');
+  this.route('about');
+  this.route('contact');
 });
 
-App.PagesRoute = Ember.Route.extend({
+App.ApplicationRoute = Ember.Route.extend({
   model: function() {
-    return App.Page.find();
+    return App.MenuItem.find();
+  },
+  setupController: function(controller, model) {
+    this.controllerFor('menu').set('content', model);
   }
 });
 
 App.IndexRoute = Ember.Route.extend({
   redirect: function() {
-    this.transitionTo('pages');
+    this.transitionTo('home');
   }
 });
 
-// TODO: Add redirect to first page in pages array
+
+
+
+// CONTROLLERS
+
+App.MenuController = Ember.ArrayController.extend();
+
+
+App.HomeController = Ember.ObjectController.extend({
+  test: 'test your mom'
+});
+
+App.AboutController = Ember.ObjectController.extend({
+  test: 'test your mom2'
+});
+
+App.ContactController = Ember.ObjectController.extend({
+  test: 'test your mom34'
+});
+
+
+
+
+// HELPERS
+
+// linkToPage helper accepts a variable for the route name
+// ex: {{#each model}} <li>{{#linkToPage name this}} {{name}} {{/linkToPage}}</li> {{/each}}
+// helper code adapted from: http://stackoverflow.com/questions/15216356/how-to-make-linkto-dynamic-in-ember
+
+Ember.Handlebars.registerHelper('linkToPage', function(name) {
+  var routeName = Ember.Handlebars.get(this, name);
+  arguments = [].slice.call(arguments, 2);
+  arguments.unshift(routeName);
+  return Ember.Handlebars.helpers.linkTo.apply(this, arguments);
+});
 
 
 
 
 // MODELS
 
-App.Page = Ember.Model.extend({
+App.MenuItem = Ember.Model.extend({
   id: Ember.attr(),
   sheetId: Ember.attr(),
   name: function() {
@@ -38,15 +77,15 @@ App.Page = Ember.Model.extend({
   }.property('id')
 });
 
-// App.Page.adapter = Ember.FixtureAdapter.create();
+// App.MenuItem.adapter = Ember.FixtureAdapter.create();
 
-// App.Page.FIXTURES = [
+// App.MenuItem.FIXTURES = [
 //   {id: 'home', spreadsheetId: 'od6'},
 //   {id: 'about', spreadsheetId: 'od7'},
 //   {id: 'contact', spreadsheetId: 'od8'}
 // ];
 
-App.Page.adapter = Ember.Adapter.create({
+App.MenuItem.adapter = Ember.Adapter.create({
 
   findAll: function(klass, records) {
     $.getJSON(App.spreadsheetRootUrl + '/worksheets/' + App.spreadsheetKey + '/public/values?alt=json-in-script&callback=?')
@@ -67,3 +106,4 @@ App.Page.adapter = Ember.Adapter.create({
   }
 
 });
+
