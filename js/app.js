@@ -7,7 +7,7 @@ App = Ember.Application.create({
 // ROUTES
 
 App.Router.map(function() {
-  // TODO: remove hard-coding and dynamically map routes for each sheet in google spreadsheet
+  // TODO: remove hard-coding and dynamically map routes
   this.route('home');
   this.route('about');
   this.route('contact');
@@ -29,24 +29,19 @@ App.IndexRoute = Ember.Route.extend({
 });
 
 
+// TODO: remove hard-coding and dynamically extend routes
+App.HomeRoute = Ember.Route.extend({
+  model: function() {
+    return App.Page.find('od6');
+  }
+});
+
+
 
 
 // CONTROLLERS
 
 App.MenuController = Ember.ArrayController.extend();
-
-
-App.HomeController = Ember.ObjectController.extend({
-  test: 'test your mom'
-});
-
-App.AboutController = Ember.ObjectController.extend({
-  test: 'test your mom2'
-});
-
-App.ContactController = Ember.ObjectController.extend({
-  test: 'test your mom34'
-});
 
 
 
@@ -71,19 +66,17 @@ Ember.Handlebars.registerHelper('linkToPage', function(name) {
 
 App.MenuItem = Ember.Model.extend({
   id: Ember.attr(),
-  sheetId: Ember.attr(),
-  name: function() {
-    return this.get('id')
-  }.property('id')
+  name: Ember.attr()
 });
 
 // App.MenuItem.adapter = Ember.FixtureAdapter.create();
 
 // App.MenuItem.FIXTURES = [
-//   {id: 'home', spreadsheetId: 'od6'},
-//   {id: 'about', spreadsheetId: 'od7'},
-//   {id: 'contact', spreadsheetId: 'od8'}
+//   {id: 'od6', name: 'home'},
+//   {id: 'od7', name: 'about'},
+//   {id: 'od8', name: 'contact'}
 // ];
+
 
 App.MenuItem.adapter = Ember.Adapter.create({
 
@@ -96,8 +89,8 @@ App.MenuItem.adapter = Ember.Adapter.create({
           // parse out the sheet id
           var sheetId = entry.id.$t.substring(entry.id.$t.lastIndexOf('/') + 1);
           var page = {
-            id: entry.title.$t,
-            sheetId: sheetId
+            id: sheetId,
+            name: entry.title.$t
           };
           pages.push(page);
         });
@@ -107,3 +100,36 @@ App.MenuItem.adapter = Ember.Adapter.create({
 
 });
 
+
+
+
+App.Page = Ember.Model.extend({
+  id: Ember.attr(),
+  name: Ember.attr(),
+  fields: Ember.attr()
+});
+
+// App.Page.adapter = Ember.FixtureAdapter.create();
+
+// App.Page.FIXTURES = [
+//   {id: 'od6', name: 'home', fields: {test1: 'testaaa data', test2: 'test1 data'}},
+//   {id: 'od7', name: 'about', fields: {test1: 'testb data', test2: 'test2 data'}},
+//   {id: 'od8', name: 'contact', fields: {test1: 'testc data', test2: 'test3 data'}}
+// ];
+
+App.Page.adapter = Ember.Adapter.create({
+
+  find: function(record, id) {
+    $.getJSON(App.spreadsheetRootUrl + '/list/' + App.spreadsheetKey + '/' + id + '/public/values?alt=json-in-script&callback=?')
+      .then(function(response) {
+        var page = {
+          id: id,
+          name: response.feed.title.$t,
+          fields: response.feed.entry[0]
+        };
+
+        record.load(id, page);
+    });
+  }
+
+});

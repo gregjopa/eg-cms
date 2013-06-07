@@ -30,18 +30,10 @@
   </script>
 
 
-
-  <script type="text/x-handlebars" id="page">
-    <h3>{{name}}</h3>
-    <p>sheet id: {{sheetId}}</p>
-    {{control 'home'}}
-  </script>
-
-
-
-
   <script type="text/x-handlebars" id="home">
     <p>Home page</p>
+    {{log this.content}}
+    <p>{{fields.gsx$description.$t}}</p>
   </script>
 
 
