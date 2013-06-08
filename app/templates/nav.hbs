@@ -1,0 +1,11 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav">
+      {{#each model}}
+        <li>{{#linkToPage name this}} {{name}} {{/linkToPage}}</li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+
+
