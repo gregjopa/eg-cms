@@ -4,64 +4,6 @@ App = Ember.Application.create({
 });
 
 
-// ROUTES
-
-App.Router.map(function() {
-  // TODO: remove hard-coding and dynamically map routes
-  this.route('home');
-  this.route('about');
-  this.route('contact');
-});
-
-App.ApplicationRoute = Ember.Route.extend({
-  model: function() {
-    return App.MenuItem.find();
-  },
-  setupController: function(controller, model) {
-    this.controllerFor('menu').set('content', model);
-  }
-});
-
-App.IndexRoute = Ember.Route.extend({
-  redirect: function() {
-    this.transitionTo('home');
-  }
-});
-
-
-// TODO: remove hard-coding and dynamically extend routes
-App.HomeRoute = Ember.Route.extend({
-  model: function() {
-    return App.Page.find('od6');
-  }
-});
-
-
-
-
-// CONTROLLERS
-
-App.MenuController = Ember.ArrayController.extend();
-
-
-
-
-// HELPERS
-
-// linkToPage helper accepts a variable for the route name
-// ex: {{#each model}} <li>{{#linkToPage name this}} {{name}} {{/linkToPage}}</li> {{/each}}
-// helper code adapted from: http://stackoverflow.com/questions/15216356/how-to-make-linkto-dynamic-in-ember
-
-Ember.Handlebars.registerHelper('linkToPage', function(name) {
-  var routeName = Ember.Handlebars.get(this, name);
-  arguments = [].slice.call(arguments, 2);
-  arguments.unshift(routeName);
-  return Ember.Handlebars.helpers.linkTo.apply(this, arguments);
-});
-
-
-
-
 // MODELS
 
 App.MenuItem = Ember.Model.extend({
@@ -76,7 +18,6 @@ App.MenuItem = Ember.Model.extend({
 //   {id: 'od7', name: 'about'},
 //   {id: 'od8', name: 'contact'}
 // ];
-
 
 App.MenuItem.adapter = Ember.Adapter.create({
 
@@ -99,8 +40,6 @@ App.MenuItem.adapter = Ember.Adapter.create({
   }
 
 });
-
-
 
 
 App.Page = Ember.Model.extend({
@@ -132,4 +71,80 @@ App.Page.adapter = Ember.Adapter.create({
     });
   }
 
+});
+
+
+
+
+// ROUTES
+
+// dynamically create routes and menu from api call
+App.deferReadiness();
+
+App.menu = App.MenuItem.findAll();
+
+App.menu.one('didLoad', function() {
+
+  // map routes
+  App.Router.map(function() {
+    var self = this;
+    App.menu.forEach(function(page, index) {
+      self.route(page.get('name'));
+    });
+  });
+
+  // extend routes
+  App.menu.forEach(function(page, index) {
+    var routeName = page.get('name').capitalize() + 'Route';
+    App[routeName] = Ember.Route.extend({
+      model: function() {
+        return App.Page.find(page.get('id'));
+      }
+    });
+  });
+
+
+  // redirect to first page
+  App.IndexRoute = Ember.Route.extend({
+    redirect: function() {
+      var pageName = App.menu.get('firstObject').get('name');
+      this.transitionTo(pageName);
+    }
+  });
+
+
+  App.advanceReadiness();
+});
+
+
+App.ApplicationRoute = Ember.Route.extend({
+  model: function() {
+    return App.menu;
+  },
+  setupController: function(controller, model) {
+    this.controllerFor('menu').set('content', model);
+  }
+});
+
+
+
+
+// CONTROLLERS
+
+App.MenuController = Ember.ArrayController.extend();
+
+
+
+
+// HELPERS
+
+// linkToPage helper accepts a variable for the route name
+// ex: {{#each model}} <li>{{#linkToPage name this}} {{name}} {{/linkToPage}}</li> {{/each}}
+// helper code adapted from: http://stackoverflow.com/questions/15216356/how-to-make-linkto-dynamic-in-ember
+
+Ember.Handlebars.registerHelper('linkToPage', function(name) {
+  var routeName = Ember.Handlebars.get(this, name);
+  arguments = [].slice.call(arguments, 2);
+  arguments.unshift(routeName);
+  return Ember.Handlebars.helpers.linkTo.apply(this, arguments);
 });
