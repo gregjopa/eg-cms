@@ -9,7 +9,6 @@ App.NavItem.adapter = Ember.Adapter.create({
     $.getJSON(App.spreadsheetRootUrl + '/worksheets/' + App.spreadsheetKey + '/public/values?alt=json-in-script&callback=?')
       .then(function(response) {
         var pages = [];
-
         response.feed.entry.forEach(function (entry) {
           // parse out the sheet id
           var sheetId = entry.id.$t.substring(entry.id.$t.lastIndexOf('/') + 1);
@@ -29,7 +28,9 @@ App.NavItem.adapter = Ember.Adapter.create({
 // App.NavItem.adapter = Ember.FixtureAdapter.create();
 
 // App.NavItem.FIXTURES = [
+//   {id: 'oda', name: 'config'},
+//   {id: 'odb', name: 'social_icons'},
 //   {id: 'od6', name: 'home'},
 //   {id: 'od7', name: 'about'},
-//   {id: 'od8', name: 'contact'}
+//   {id: 'od4', name: 'contact'}
 // ];
