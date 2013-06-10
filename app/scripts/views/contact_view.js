@@ -1,6 +1,7 @@
 App.ContactView = Ember.View.extend({
   templateName: 'contact',
   mailto: function() {
-    return 'mailto:' + this.controller.get('fields.gsx$email.$t');
-  }.property('controller.email')
+    console.log(this.controller.get('fields.email'));
+    return 'mailto:' + this.controller.get('fields.email');
+  }.property('controller.fields.email')
 });

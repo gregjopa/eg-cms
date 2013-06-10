@@ -16,7 +16,7 @@ App.spreadsheetParser = Ember.Object.create({
     var page = {
       id: id,
       name: feed.title.$t,
-      fields: feed.entry[0]
+      fields: this.renameFields(feed.entry[0])
     };
 
     return page;
@@ -25,8 +25,9 @@ App.spreadsheetParser = Ember.Object.create({
 
   list: function(id, feed) {
     var fields = [];
+    var self = this;
     feed.entry.forEach(function(entry, index) {
-      fields.push(entry);
+      fields.push(self.renameFields(entry));
     });
 
     var page = {
@@ -39,9 +40,18 @@ App.spreadsheetParser = Ember.Object.create({
 
   },
 
-  // TODO: add method to remove 'gsx$' from google spreadsheet field names
+  // remove 'gsx$' from google spreadsheet field names
   renameFields: function(fields) {
-
+    formattedFields = {};
+    var keys = Object.keys(fields);
+    keys.forEach(function(key, index) {
+      var fieldIndicator = 'gsx$';
+      if (key.indexOf(fieldIndicator) !== -1) {
+        var formattedKey = key.replace(fieldIndicator, '');
+        formattedFields[formattedKey] = fields[key].$t;
+      }
+    });
+    return formattedFields;
   }
 
 });
