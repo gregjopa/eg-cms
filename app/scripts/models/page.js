@@ -9,12 +9,7 @@ App.Page.adapter = Ember.Adapter.create({
   find: function(record, id) {
     $.getJSON(App.spreadsheetRootUrl + '/list/' + App.spreadsheetKey + '/' + id + '/public/values?alt=json-in-script&callback=?')
       .then(function(response) {
-        var page = {
-          id: id,
-          name: response.feed.title.$t,
-          fields: response.feed.entry[0]
-        };
-
+        var page = App.spreadsheetParser.parse(id, response.feed);
         record.load(id, page);
     });
   },
@@ -25,11 +20,8 @@ App.Page.adapter = Ember.Adapter.create({
     var deferredArr = $.map(ids, function(id, index) {
       return $.getJSON(App.spreadsheetRootUrl + '/list/' + App.spreadsheetKey + '/' + id + '/public/values?alt=json-in-script&callback=?')
         .then(function(response) {
-          globalPages.push({
-            id: id,
-            name: response.feed.title.$t,
-            fields: response.feed.entry[0]
-          });
+          var page = App.spreadsheetParser.parse(id, response.feed);
+          globalPages.push(page);
       });
     });
 

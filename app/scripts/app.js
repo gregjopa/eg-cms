@@ -10,8 +10,10 @@ require('app/scripts/vendor/*');
 require('app/scripts/routes/*');
 require('app/scripts/controllers/*');
 require('app/scripts/models/*');
+require('app/scripts/views/*');
 require('app/scripts/helpers/*');
-// require('app/scripts/views/*');
+require('app/scripts/mixins/*');
+
 
 
 // dynamically create routes and nav from api call
