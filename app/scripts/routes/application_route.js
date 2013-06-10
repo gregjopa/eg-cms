@@ -1,7 +1,29 @@
 // eg-cms dynamically creates routes based on the number of sheets in the spreadsheet
 
+App.createApplicationRoute = function(nav, globalPageIds) {
+
+  App.ApplicationRoute = Ember.Route.extend({
+    // load application route w/ data for all global pages
+    model: function() {
+      return App.Page.find(globalPageIds);
+    },
+    setupController: function(controller, model) {
+      var globalPages = model.get('content');
+      var data = {};
+
+      globalPages.forEach(function(page, index) {
+        data[page.get('name')] = page;
+      });
+      this.controller.set('data', data);
+      this.controllerFor('nav').set('content', nav);
+    }
+  });
+
+};
+
+
 // pass in an array of nav items
-App.createRoutes = function(nav) {
+App.createPageRoutes = function(nav) {
 
   // map routes
   App.Router.map(function() {
@@ -31,16 +53,6 @@ App.createRoutes = function(nav) {
     }
   });
 
-
-  // load application route w/ nav data
-  App.ApplicationRoute = Ember.Route.extend({
-    model: function() {
-      return nav;
-    },
-    setupController: function(controller, model) {
-      this.controllerFor('nav').set('content', model);
-    }
-  });
 
 };
 

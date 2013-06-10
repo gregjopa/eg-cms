@@ -3,14 +3,6 @@ App.NavItem = Ember.Model.extend({
   name: Ember.attr()
 });
 
-// App.NavItem.adapter = Ember.FixtureAdapter.create();
-
-// App.NavItem.FIXTURES = [
-//   {id: 'od6', name: 'home'},
-//   {id: 'od7', name: 'about'},
-//   {id: 'od8', name: 'contact'}
-// ];
-
 App.NavItem.adapter = Ember.Adapter.create({
 
   findAll: function(klass, records) {
@@ -32,3 +24,12 @@ App.NavItem.adapter = Ember.Adapter.create({
   }
 
 });
+
+
+// App.NavItem.adapter = Ember.FixtureAdapter.create();
+
+// App.NavItem.FIXTURES = [
+//   {id: 'od6', name: 'home'},
+//   {id: 'od7', name: 'about'},
+//   {id: 'od8', name: 'contact'}
+// ];
