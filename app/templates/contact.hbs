@@ -2,7 +2,7 @@
 
 {{#with fields}}
   <p>{{gsx$paragraph.$t}}</p>
-  <a href="mailto:{{gsx$email.$t}}" class="btn btn-primary btn-large" target="_blank">
+  <a {{bindAttr href=view.mailto}} class="btn btn-primary btn-large" target="_blank">
     {{gsx$email.$t}}
   </a>
 {{/with}}

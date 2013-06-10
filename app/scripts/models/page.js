@@ -22,7 +22,6 @@ App.Page.adapter = Ember.Adapter.create({
         .then(function(response) {
           var page = App.spreadsheetParser.parse(id, response.feed);
           globalPages.push(page);
-          console.log(page);
       });
     });
 
