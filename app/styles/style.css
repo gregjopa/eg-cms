@@ -24,6 +24,9 @@ header .nav {
 
 .page-container {
   margin: 40px 0;
+  /* TODO: apply a dynamic height to container for absolute positioned child elements (ember-animated-outlet) */
+  min-height: 200px;
+  position: relative;
 }
 
 h1 {
