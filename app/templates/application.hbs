@@ -1,7 +1,15 @@
 <div class="container eg-cms-container">
-  {{#with data.config}}
-  <h3>{{fields.gsx$sitename.$t}}</h3>
-  {{/with}}
-  {{render nav}}
-  {{outlet}}
+
+  <!-- header -->
+  {{partial header}}
+
+  <!-- page content -->
+  <div class="page-container">
+    {{outlet}}
+  </div>
+
+
+  <!-- footer -->
+  {{partial footer}}
+
 </div>

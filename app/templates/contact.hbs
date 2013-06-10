@@ -1,3 +1,8 @@
-<p>Contact page</p>
+<h1>{{name}}</h1>
 
-
+{{#with fields}}
+  <p>{{gsx$paragraph.$t}}</p>
+  <a href="mailto:{{gsx$email.$t}}" class="btn btn-primary btn-large" target="_blank">
+    {{gsx$email.$t}}
+  </a>
+{{/with}}
