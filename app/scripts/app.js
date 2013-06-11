@@ -14,6 +14,8 @@ require('app/scripts/views/*');
 require('app/scripts/helpers/*');
 require('app/scripts/mixins/*');
 
+// uncomment this line to use fixture data
+// require('app/scripts/models/fixtures/*');
 
 
 // dynamically create routes and nav from api call
