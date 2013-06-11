@@ -6,7 +6,7 @@ App.Page.FIXTURES = [
     name: 'config',
     fields: {
       sitename: 'EG-CMS',
-      sitetagline: 'a fun and easy to use cms',
+      tagline: 'a flexible and easy to use cms',
       footertext: 'Copyright 2013 EG-CMS'
     }
   },

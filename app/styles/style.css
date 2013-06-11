@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
+
 body {
   background-color: whitesmoke;
 }
@@ -9,6 +11,7 @@ body {
 
 header .logo {
   display: block;
+  font-weight: bold;
 }
 
 header .tagline {
@@ -30,6 +33,7 @@ header .nav {
 }
 
 h1 {
+  font-family: 'Lato', sans-serif;
   font-weight: normal;
   text-transform: uppercase;
 }
