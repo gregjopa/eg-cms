@@ -48,6 +48,7 @@ The following two HTTP GET requests are used to query data from a public google 
 ## Configure Development Environment
 
 1. clone this repo: `git clone https://github.com/gregjopa/eg-cms.git`
-2. install node dependencies: `npm install`
-3. install bower dependencies: `bower install`
-4. start your local dev server: `grunt server --force`
+2. change directory: `cd eg-cms`
+3. install node dependencies: `npm install`
+4. install bower dependencies: `bower install`
+5. start your local dev server: `grunt server --force`
