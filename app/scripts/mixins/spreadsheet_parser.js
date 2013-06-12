@@ -42,7 +42,7 @@ App.spreadsheetParser = Ember.Object.create({
 
   // remove 'gsx$' from google spreadsheet field names
   renameFields: function(fields) {
-    formattedFields = {};
+    var formattedFields = {};
     var keys = Object.keys(fields);
     keys.forEach(function(key, index) {
       var fieldIndicator = 'gsx$';

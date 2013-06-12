@@ -4,8 +4,8 @@
 
 Ember.Handlebars.registerHelper('linkToPageAnimated', function(name) {
   var routeName = Ember.Handlebars.get(this, name);
-  arguments = [].slice.call(arguments, 2);
-  arguments.unshift(routeName);
-  arguments[1].hash = {animations: 'main:fade'};
-  return Ember.Handlebars.helpers.linkToAnimated.apply(this, arguments);
+  var options = [].slice.call(arguments, 2);
+  options.unshift(routeName);
+  options[1].hash = {animations: 'main:fade'};
+  return Ember.Handlebars.helpers.linkToAnimated.apply(this, options);
 });
