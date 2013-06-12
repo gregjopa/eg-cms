@@ -1,5 +1,6 @@
 {
     "node": true,
+    "browser": true,
     "es5": true,
     "esnext": true,
     "bitwise": false,
@@ -13,5 +14,10 @@
     "undef": true,
     "strict": false,
     "trailing": true,
-    "smarttabs": true
+    "smarttabs": true,
+    "globals": {
+        "Ember": false,
+        "$": false,
+        "App": false
+    }
 }
