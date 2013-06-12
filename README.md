@@ -1,6 +1,8 @@
-# eg-cms
+# EG-CMS
 
-A simple cms built with Ember.js and backed by a Google Spreadsheet as the datastore.
+A flexible and easy to use cms. This library uses Ember.js and is backed by a Google Spreadsheet
+as the datastore. You can easily host a EG-CMS since its just html, css, and javascript.
+No database required.
 
 
 ## Demo Spreadsheet
@@ -8,7 +10,8 @@ A simple cms built with Ember.js and backed by a Google Spreadsheet as the datas
 The following Google Drive spreadsheet is public and has been published to the web:
 https://docs.google.com/spreadsheet/pub?key=0AhVgr8DOJUHsdHE1ajduUEhOaGpuV3VCQTdxV0lCYWc&gid=0
 
-Each sheet in this spreadsheet is for a single page in the cms.
+Each regular sheet in this spreadsheet is for a single page in the cms. The exception sheets are listed
+in the globalPages array. These global pages contain data that's meant to be displayed on multiple pages.
 
 
 ## Google Spreadsheets API
