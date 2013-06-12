@@ -5,6 +5,8 @@ body {
 }
 
 .eg-cms-container {
+  border: 1px solid #999;
+  border-top: 0;
   background-color: white;
   padding: 20px;
 }
@@ -28,7 +30,7 @@ header .nav {
 .page-container {
   margin: 40px 0;
   /* TODO: apply a dynamic height to container for absolute positioned child elements (ember-animated-outlet) */
-  min-height: 200px;
+  min-height: 300px;
   position: relative;
 }
 
