@@ -1,5 +1,19 @@
 <h1>{{name}}</h1>
+<div class="row">
 
-{{#each fields}}
-  <p>{{paragraph}}</p>
-{{/each}}
+  <div class="span8">
+    {{#each view.paragraphs}}
+      <p>{{paragraph}}</p>
+    {{/each}}
+  </div>
+
+  <div class="span4">
+    <p>EG-CMS is built with:</p>
+    <ul>
+      {{#each fields}}
+        <li>{{link}}</li>
+      {{/each}}
+    </ul>
+  </div>
+
+</div>
