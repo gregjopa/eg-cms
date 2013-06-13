@@ -1,8 +1,8 @@
 window.App = Ember.Application.create({
   spreadsheetKey: '0AhVgr8DOJUHsdHE1ajduUEhOaGpuV3VCQTdxV0lCYWc',
   spreadsheetRootUrl: 'https://spreadsheets.google.com/feeds',
-  // a 'global page' contains data thats displayed on many pages (ex: site name, footer text, sidebar)
-  globalPages: ['config', 'social_icons']
+  // a 'global sheet' contains data thats displayed on many pages (ex: site name, footer text, sidebar)
+  globalSheets: ['config', 'social icons']
 });
 
 
@@ -24,11 +24,11 @@ App.deferReadiness();
 App.nav = App.NavItem.findAll();
 
 App.nav.one('didLoad', function() {
-  var globalPageIds = [];
+  var globalSheetIds = [];
   var navItems = App.nav.filter(function(item, index) {
 
-    if (App.globalPages.contains(item.get('name'))) {
-      globalPageIds.push(item.get('id'));
+    if (App.globalSheets.contains(item.get('name'))) {
+      globalSheetIds.push(item.get('id'));
       return false;
     }
     else {
@@ -37,7 +37,7 @@ App.nav.one('didLoad', function() {
 
   });
 
-  App.createApplicationRoute(navItems, globalPageIds);
+  App.createApplicationRoute(navItems, globalSheetIds);
   App.createPageRoutes(navItems);
   App.advanceReadiness();
 });

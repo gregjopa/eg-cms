@@ -15,19 +15,19 @@ App.Page.adapter = Ember.Adapter.create({
   },
 
   findMany: function(klass, records, ids) {
-    var globalPages = [];
+    var globalSheets = [];
 
     var deferredArr = $.map(ids, function(id, index) {
       return $.getJSON(App.spreadsheetRootUrl + '/list/' + App.spreadsheetKey + '/' + id + '/public/values?alt=json-in-script&callback=?')
         .then(function(response) {
           var page = App.spreadsheetParser.parse(id, response.feed);
-          globalPages.push(page);
+          globalSheets.push(page);
       });
     });
 
 
     $.when.apply(null, deferredArr).done(function() {
-      records.load(klass, globalPages);
+      records.load(klass, globalSheets);
     });
 
   }

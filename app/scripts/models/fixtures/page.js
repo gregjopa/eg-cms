@@ -5,9 +5,9 @@ App.Page.FIXTURES = [
     id: 'oda',
     name: 'config',
     fields: {
-      sitename: 'EG-CMS',
-      tagline: 'a flexible and easy to use cms',
-      footertext: 'Copyright 2013 EG-CMS'
+      siteName: 'EG-CMS',
+      siteTagline: 'a flexible and easy to use cms',
+      footerText: 'Copyright 2013 EG-CMS'
     }
   },
   {

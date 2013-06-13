@@ -18,7 +18,6 @@ App.spreadsheetParser = Ember.Object.create({
       name: feed.title.$t,
       fields: this.renameFields(feed.entry[0])
     };
-
     return page;
   },
 
@@ -37,8 +36,8 @@ App.spreadsheetParser = Ember.Object.create({
     };
 
     return page;
-
   },
+
 
   // remove 'gsx$' from google spreadsheet field names
   renameFields: function(fields) {
@@ -47,7 +46,8 @@ App.spreadsheetParser = Ember.Object.create({
     keys.forEach(function(key, index) {
       var fieldIndicator = 'gsx$';
       if (key.indexOf(fieldIndicator) !== -1) {
-        var formattedKey = key.replace(fieldIndicator, '');
+        // remove 'gsx$' from property name and convert to camel case
+        var formattedKey = key.replace(fieldIndicator, '').camelize();
         formattedFields[formattedKey] = fields[key].$t;
       }
     });
