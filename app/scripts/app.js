@@ -2,7 +2,8 @@ window.App = Ember.Application.create({
   spreadsheetKey: '0AhVgr8DOJUHsdHE1ajduUEhOaGpuV3VCQTdxV0lCYWc',
   spreadsheetRootUrl: 'https://spreadsheets.google.com/feeds',
   // a 'global sheet' contains data thats displayed on many pages (ex: site name, footer text, sidebar)
-  globalSheets: ['config', 'social icons']
+  globalSheets: ['config', 'social icons'],
+  animationType: 'fade'
 });
 
 
