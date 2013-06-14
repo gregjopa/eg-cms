@@ -1,10 +1,10 @@
 <header>
-  {{#with data.config.fields}}
-    <h1>
-      <span class="logo">{{siteName}}</span>
-      <span class="tagline">{{siteTagline}}</span>
-    </h1>
-  {{/with}}
+  <h1>
+    {{#linkToPageAnimated data.firstPageName this}}
+      <span class="logo">{{data.config.fields.siteName}}</span>
+    {{/linkToPageAnimated}}
+    <span class="tagline">{{data.config.fields.siteTagline}}</span>
+  </h1>
 
   <!-- navigation -->
   {{render nav}}

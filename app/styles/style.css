@@ -12,6 +12,7 @@ body {
 }
 
 header .logo {
+  color: black;
   display: block;
   font-weight: bold;
 }

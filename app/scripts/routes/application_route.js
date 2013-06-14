@@ -15,6 +15,8 @@ App.createApplicationRoute = function(nav, globalSheetIds) {
         var formattedPageName = page.get('name').capitalize().camelize();
         data[formattedPageName] = page;
       });
+
+      data.firstPageName = nav.get('firstObject').get('name');
       this.controller.set('data', data);
       this.controllerFor('nav').set('content', nav);
     }
@@ -56,7 +58,3 @@ App.createPageRoutes = function(nav) {
 
 
 };
-
-
-
-
